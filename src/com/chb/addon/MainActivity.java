@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.*;
+
 public class MainActivity extends Activity {
 
 	private boolean mIsExit = false;
@@ -23,6 +26,11 @@ public class MainActivity extends Activity {
 	private double latitude = 0.0;
 	private double longitude = 0.0;
 	private TextView tx1;
+	private Button btn1;
+	private NetworkManager networkManager;
+
+	private String openIt = "打开数据";
+	private String closeIt = "关闭数据";
 
 
 	/**
@@ -32,18 +40,57 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		networkManager = new NetworkManager(getApplicationContext());
+
 		tx1 = (TextView) findViewById(R.id.tx1);
 		tx1.setTextSize(18);
 		tx1.setText("我是主进程，我的进程 PID = " + Process.myPid());
 		tx1.setTextColor(Color.BLUE);
-		Button btn = (Button) findViewById(R.id.btn1);
-		btn.setOnClickListener(new View.OnClickListener() {
+
+		btn1 = (Button) findViewById(R.id.btn1);
+		if(networkManager.isMobileConnected()) {
+			btn1.setText(closeIt);
+		} else {
+			btn1.setText(openIt);
+		}
+		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 //				tx1.setText("启动中...");
 //				startOtherApp();
-				tx1.setText("定位中...");
-				startLocate();
+
+//				tx1.setText("定位中...");
+//				startLocate();
+
+				try {
+					if(btn1.getText().equals(closeIt)){
+//					setMobileDataStatus(getApplicationContext(), false);
+						networkManager.toggleGprs(false);
+						btn1.setText(openIt);
+					} else {
+//					setMobileDataStatus(getApplicationContext(), true);
+						networkManager.toggleGprs(true);
+						btn1.setText(closeIt);
+					}
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (NoSuchFieldException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+
 			}
 		});
 
@@ -170,5 +217,56 @@ public class MainActivity extends Activity {
 			tx1.setText("定位中...\n经度： " + location.getLongitude() + "\n纬度： " + location.getLatitude());
 		}
 	}
+
+	public void setMobileDataStatus(Context context, boolean enabled)
+
+	{
+
+		ConnectivityManager conMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		// ConnectivityManager类
+		Class<?> conMgrClass = null;
+		// ConnectivityManager类中的字段
+		Field iConMgrField = null;
+		// IConnectivityManager类的引用
+		Object iConMgr = null;
+		// IConnectivityManager类
+		Class<?> iConMgrClass = null;
+		// setMobileDataEnabled方法
+		Method setMobileDataEnabledMethod = null;
+		try {
+			// 取得ConnectivityManager类
+			conMgrClass = Class.forName(conMgr.getClass().getName());
+			// 取得ConnectivityManager类中的对象Mservice
+			iConMgrField = conMgrClass.getDeclaredField("mService");
+			// 设置mService可访问
+			iConMgrField.setAccessible(true);
+			// 取得mService的实例化类IConnectivityManager
+			iConMgr = iConMgrField.get(conMgr);
+			// 取得IConnectivityManager类
+			iConMgrClass = Class.forName(iConMgr.getClass().getName());
+			// 取得IConnectivityManager类中的setMobileDataEnabled(boolean)方法
+			setMobileDataEnabledMethod = iConMgrClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+			// 设置setMobileDataEnabled方法是否可访问
+			setMobileDataEnabledMethod.setAccessible(true);
+			// 调用setMobileDataEnabled方法
+			setMobileDataEnabledMethod.invoke(iConMgr, enabled);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }
