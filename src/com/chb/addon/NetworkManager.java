@@ -13,8 +13,16 @@ import java.lang.reflect.Method;
  * Created by hempel on 14-2-25.
  */
 public class NetworkManager {
-	private Context context;
-	private ConnectivityManager connManager;
+	private static Context context;
+	private static ConnectivityManager connManager;
+	private static NetworkManager instance = null;
+
+	public static NetworkManager getInstance(Context context){
+		if (instance == null) {
+			instance = new NetworkManager(context);
+		}
+		return instance;
+	}
 
 	public NetworkManager(Context context) {
 		this.context = context;
@@ -25,7 +33,7 @@ public class NetworkManager {
 	/**
 	 * @return 网络是否连接可用
 	 */
-	public boolean isNetworkConnected() {
+	public static boolean isNetworkConnected() {
 
 		NetworkInfo networkinfo = connManager.getActiveNetworkInfo();
 
@@ -39,7 +47,7 @@ public class NetworkManager {
 	/**
 	 * @return wifi是否连接可用
 	 */
-	public boolean isWifiConnected() {
+	public static boolean isWifiConnected() {
 
 		NetworkInfo mWifi = connManager
 				                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -55,7 +63,7 @@ public class NetworkManager {
 	 * 当wifi不能访问网络时，mobile才会起作用
 	 * @return GPRS是否连接可用
 	 */
-	public boolean isMobileConnected() {
+	public static boolean isMobileConnected() {
 
 		NetworkInfo mMobile = connManager
 				                      .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -72,7 +80,7 @@ public class NetworkManager {
 	 * @param isEnable
 	 * @throws Exception
 	 */
-	public void toggleGprs(boolean isEnable) throws Exception {
+	public static void toggleGprs(boolean isEnable) throws Exception {
 		Class<?> cmClass = connManager.getClass();
 		Class<?>[] argClasses = new Class[1];
 		argClasses[0] = boolean.class;
@@ -88,7 +96,7 @@ public class NetworkManager {
 	 * @param enabled
 	 * @return 设置是否success
 	 */
-	public boolean toggleWiFi(boolean enabled) {
+	public static boolean toggleWiFi(boolean enabled) {
 		WifiManager wm = (WifiManager) context
 				                               .getSystemService(Context.WIFI_SERVICE);
 		return wm.setWifiEnabled(enabled);
@@ -99,7 +107,7 @@ public class NetworkManager {
 	 *
 	 * @return 是否处于飞行模式
 	 */
-	public boolean isAirplaneModeOn() {
+	public static boolean isAirplaneModeOn() {
 		// 返回值是1时表示处于飞行模式
 		int modeIdx = Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0);
 		boolean isEnabled = (modeIdx == 1);
@@ -109,7 +117,7 @@ public class NetworkManager {
 	 * 飞行模式开关
 	 * @param setAirPlane
 	 */
-	public void toggleAirplaneMode(boolean setAirPlane) {
+	public static void toggleAirplaneMode(boolean setAirPlane) {
 		Settings.System.putInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, setAirPlane ? 1 : 0);
 		// 广播飞行模式信号的改变，让相应的程序可以处理。
 		// 不发送广播时，在非飞行模式下，Android 2.2.1上测试关闭了Wifi,不关闭正常的通话网络(如GMS/GPRS等)。

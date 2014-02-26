@@ -27,11 +27,6 @@ public class MainActivity extends Activity {
 	private double longitude = 0.0;
 	private TextView tx1;
 	private Button btn1;
-	private NetworkManager networkManager;
-
-	private String openIt = "打开数据";
-	private String closeIt = "关闭数据";
-
 
 	/**
 	 * Called when the activity is first created.
@@ -41,55 +36,20 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		networkManager = new NetworkManager(getApplicationContext());
-
 		tx1 = (TextView) findViewById(R.id.tx1);
 		tx1.setTextSize(18);
 		tx1.setText("我是主进程，我的进程 PID = " + Process.myPid());
 		tx1.setTextColor(Color.BLUE);
 
 		btn1 = (Button) findViewById(R.id.btn1);
-		if(networkManager.isMobileConnected()) {
-			btn1.setText(closeIt);
-		} else {
-			btn1.setText(openIt);
-		}
 		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 //				tx1.setText("启动中...");
 //				startOtherApp();
 
-//				tx1.setText("定位中...");
-//				startLocate();
-
-				try {
-					if(btn1.getText().equals(closeIt)){
-//					setMobileDataStatus(getApplicationContext(), false);
-						networkManager.toggleGprs(false);
-						btn1.setText(openIt);
-					} else {
-//					setMobileDataStatus(getApplicationContext(), true);
-						networkManager.toggleGprs(true);
-						btn1.setText(closeIt);
-					}
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (NoSuchFieldException e) {
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
+				tx1.setText("定位中...");
+				startLocate();
 
 			}
 		});

@@ -23,5 +23,19 @@
 		          android:label="我是一个子进程"
 		          android:process=":child_process_any_name_is_ok">
 		</activity>
+
+		<receiver android:name=".Widget.MyWidgetProvider">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider"
+			           android:resource="@xml/info" />
+		</receiver>
+
+		<receiver android:name=".Widget.MyWidgetBroadcast">
+			<intent-filter>
+				<action android:name="CHANGE_MAIN_BUTTON_CONTENT"/>
+			</intent-filter>
+		</receiver>
 	</application>
 </manifest>
