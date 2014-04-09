@@ -13,8 +13,8 @@ import android.widget.FrameLayout;
 import com.chb.addon.AddonBase.AddonLoader;
 
 public class InnerAppActivity extends FragmentActivity {
-	private String mAddonLunchFragment = "com.chb.addon.otherapp.OtherFragment";
-	private String mAddonApkPath = "OtherActivity.apk";
+	private String mAddonLunchFragment = "com.chb.addon.addonfragment.AddonFragment";
+	private String mAddonApkPath = "AddonFragment.apk";
 
 	private AssetManager asm;
 	private Resources res;
