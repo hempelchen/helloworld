@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import java.lang.reflect.*;
 
+import com.chb.addon.light.LightActivity;
+
 public class MainActivity extends Activity {
 
 	private boolean mIsExit = false;
@@ -45,11 +47,14 @@ public class MainActivity extends Activity {
 		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-//				tx1.setText("启动中...");
-//				startOtherApp();
+				tx1.setText("启动中...");
+				startOtherApp();
 
-				tx1.setText("定位中...");
-				startLocate();
+//				tx1.setText("定位中...");
+//				startLocate();
+
+//				tx1.setText("打开手电筒");
+//				startLight();
 
 			}
 		});
@@ -80,6 +85,13 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(context, InnerAppActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
+	}
+
+	private void startLight() {
+//		Context context = this.getApplicationContext();
+		Intent intent = new Intent(this, LightActivity.class);
+//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
 	}
 
 	private void startLocate() {
