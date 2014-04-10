@@ -3,22 +3,21 @@ package com.chb.addon.launchmode;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by renen-inc_hempel on 14-4-2.
  */
-public class ActB extends Activity {
+public class ActC extends Activity {
+	/** Called when the activity is first created. */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setTitle("actB singleTop");
+		this.setTitle("actC singleTask");
 		TextView textView = new TextView(this);
 		textView.setText(this + "");
 		TextView textView2 = new TextView(this);
@@ -29,7 +28,7 @@ public class ActB extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActB.this, ActA.class);
+				intent.setClass(ActC.this, ActA.class);
 				startActivity(intent);
 			}
 		});
@@ -40,7 +39,7 @@ public class ActB extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActB.this, ActB.class);
+				intent.setClass(ActC.this, ActB.class);
 				startActivity(intent);
 			}
 		});
@@ -51,7 +50,7 @@ public class ActB extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActB.this, ActC.class);
+				intent.setClass(ActC.this, ActC.class);
 				startActivity(intent);
 			}
 		});
@@ -62,7 +61,7 @@ public class ActB extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActB.this, ActD.class);
+				intent.setClass(ActC.this, ActD.class);
 				startActivity(intent);
 			}
 		});

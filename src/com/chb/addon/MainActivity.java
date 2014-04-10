@@ -40,14 +40,14 @@ public class MainActivity extends Activity {
 
 		tx1 = (TextView) findViewById(R.id.tx1);
 		tx1.setTextSize(18);
-		tx1.setText("我是主进程，我的进程 PID = " + Process.myPid());
+		tx1.setText("我是主进程\nPID = " + Process.myPid() + "\ntask id: " + this.getTaskId() );
 		tx1.setTextColor(Color.BLUE);
 
 		btn1 = (Button) findViewById(R.id.btn1);
 		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				tx1.setText("启动中...");
+//				tx1.setText("启动中...");
 				startOtherApp();
 
 //				tx1.setText("定位中...");
