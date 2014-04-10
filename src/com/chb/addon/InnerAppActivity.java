@@ -86,7 +86,7 @@ public class InnerAppActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		android.os.Process.killProcess(android.os.Process.myPid());
+//		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
 	@Override
