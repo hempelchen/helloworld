@@ -88,7 +88,7 @@
 
 		<receiver android:name=".Widget.MyWidgetBroadcast">
 			<intent-filter>
-				<action android:name="CHANGE_MAIN_BUTTON_CONTENT"/>
+				<action android:name="CHANGE_MAIN_BUTTON_CONTENT_HW"/>
 			</intent-filter>
 		</receiver>
 	</application>

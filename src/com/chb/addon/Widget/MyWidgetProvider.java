@@ -21,7 +21,7 @@ public class MyWidgetProvider extends AppWidgetProvider{
 	@Override
 	public void onDeleted(Context context, int[] appWidgetIds) {
 		// TODO Auto-generated method stub
-		System.out.println(Thread.currentThread().getStackTrace()[2].getMethodName().toString());
+		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 
 		super.onDeleted(context, appWidgetIds);
 	}
@@ -29,14 +29,14 @@ public class MyWidgetProvider extends AppWidgetProvider{
 	@Override
 	public void onDisabled(Context context) {
 		// TODO Auto-generated method stub
-		System.out.println(Thread.currentThread().getStackTrace()[2].getMethodName().toString());
+		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		super.onDisabled(context);
 	}
 
 	@Override
 	public void onEnabled(Context context) {
 		// TODO Auto-generated method stub
-		System.out.println(Thread.currentThread().getStackTrace()[2].getMethodName().toString());
+		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		super.onEnabled(context);
 	}
 
@@ -44,8 +44,7 @@ public class MyWidgetProvider extends AppWidgetProvider{
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		RemoteViews views=new RemoteViews(context.getPackageName(), R.layout.mobile_data);
-		System.out.println("输出2");
-		System.out.println(Thread.currentThread().getStackTrace()[2].getMethodName().toString());
+		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		System.out.println(intent.getAction());
 		try {
 			if(NetworkManager.getInstance(context).isMobileConnected()) {
@@ -67,11 +66,11 @@ public class MyWidgetProvider extends AppWidgetProvider{
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
-		System.out.println(Thread.currentThread().getStackTrace()[2].getMethodName().toString());
+		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 
 		for(int i=0;i<appWidgetIds.length;i++){
 			
-			Intent intent = new Intent("CHANGE_MAIN_BUTTON_CONTENT");
+			Intent intent = new Intent("CHANGE_MAIN_BUTTON_CONTENT_HW");
 			RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.mobile_data);
 			PendingIntent pending = PendingIntent.getBroadcast(context, 0, intent, 0);
 			remoteViews.setOnClickPendingIntent(R.id.btn_mobile_data_switcher, pending);
