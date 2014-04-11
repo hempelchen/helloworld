@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AIDLClientDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="input_name">请输入姓名:</string>
+    <string name="input_age">请输入年龄:</string>
+    <string name="input_place">请输入位置:</string>
+    <string name="app_descri">调用AIDl进行信息处理的Demo:</string>
+    <string name="commit">提    交</string>
+
+</resources>
