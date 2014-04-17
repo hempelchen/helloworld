@@ -1,19 +1,14 @@
-package com.chb.addon.Widget;
+package com.chb.addon.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateFormat;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import com.chb.addon.NetworkManager;
 import com.chb.addon.R;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class MyWidgetProvider extends AppWidgetProvider{
 	private TextView tx1;

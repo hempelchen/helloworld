@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import com.chb.addon.AddonBase.AddonLoader;
+import com.chb.addon.addonbase.AddonLoader;
 
 public class InnerAppActivity extends FragmentActivity {
 	private String mAddonLunchFragment = "com.chb.addon.addonfragment.AddonFragment";
@@ -70,12 +70,14 @@ public class InnerAppActivity extends FragmentActivity {
 
 	@Override
 	public Resources getResources() {
-		return res == null ? super.getResources() : res;
+//		return res == null ? super.getResources() : res;
+		return super.getResources();
 	}
 
 	@Override
 	public Resources.Theme getTheme() {
-		return keepTheme || thm == null ? super.getTheme() : thm;
+//		return keepTheme || thm == null ? super.getTheme() : thm;
+		return super.getTheme();
 	}
 
 	@Override

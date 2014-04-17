@@ -1,4 +1,4 @@
-package com.chb.addon.Widget;
+package com.chb.addon.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -6,13 +6,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import com.chb.addon.NetworkManager;
-import com.chb.addon.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

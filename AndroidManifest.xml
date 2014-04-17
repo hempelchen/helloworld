@@ -28,7 +28,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".InnerAppActivity"
-		          android:process=":child_process_any_name_is_ok"
 		          android:label="我是一个子进程">
 
 		          <!-- 如果需要启动独立的子进程，可以打开下面的注视
@@ -78,7 +77,7 @@
 			</intent-filter>
 		</activity>
 
-		<receiver android:name=".Widget.MyWidgetProvider">
+		<receiver android:name=".widget.MyWidgetProvider">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
 			</intent-filter>
@@ -86,7 +85,7 @@
 			           android:resource="@xml/info" />
 		</receiver>
 
-		<receiver android:name=".Widget.MyWidgetBroadcast">
+		<receiver android:name=".widget.MyWidgetBroadcast">
 			<intent-filter>
 				<action android:name="CHANGE_MAIN_BUTTON_CONTENT_HW"/>
 			</intent-filter>
