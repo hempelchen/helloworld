@@ -41,7 +41,7 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".launchmode.ActA"
+		<!--activity android:name=".launchmode.ActA"
 		          android:launchMode="standard"
 				  android:label="ActA standard">
 			<intent-filter>
@@ -82,7 +82,8 @@
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
-		</activity>
+		</activity-->
+		<activity android:name=".js.MyWebviewActivity"/>
 
 		<receiver android:name=".widget.MyWidgetProvider">
 			<intent-filter>

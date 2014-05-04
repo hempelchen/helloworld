@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.*;
 
+import com.chb.addon.js.MyWebviewActivity;
 import com.chb.addon.light.LightActivity;
 
 public class MainActivity extends Activity {
@@ -48,13 +49,16 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 //				tx1.setText("启动中...");
-				startOtherApp();
+//				startOtherApp();
 
 //				tx1.setText("定位中...");
 //				startLocate();
 
 //				tx1.setText("打开手电筒");
 //				startLight();
+
+				tx1.setText("启动中Webview");
+				startMyWebview();
 
 			}
 		});
@@ -82,6 +86,13 @@ public class MainActivity extends Activity {
 	private void startOtherApp() {
 		Context context = this.getApplicationContext();
 		Intent intent = new Intent(context, InnerAppActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(intent);
+	}
+
+	private void startMyWebview() {
+		Context context = this.getApplicationContext();
+		Intent intent = new Intent(context, MyWebviewActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}
