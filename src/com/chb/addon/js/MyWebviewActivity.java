@@ -3,18 +3,21 @@ package com.chb.addon.js;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.text.format.DateFormat;
 import android.view.KeyEvent;
 import android.webkit.*;
 import android.widget.TextView;
 import com.chb.addon.R;
 
 import java.io.File;
+import java.util.Date;
 
 /**
  * Created by renen-inc_hempel on 14-5-4.
@@ -22,7 +25,9 @@ import java.io.File;
 public class MyWebviewActivity extends Activity {
 
 	private WebView contentWebView = null;
-	private TextView msgView = null;
+	private ValueCallback<Uri> mUploadMessage = null;
+	private static int RESULT_LOAD_IMAGE = 1;
+	private String mCameraFilePath = "";
 
 	private static int MINIMUM_FONT_SIZE = 8;
 	private static int MINIMUM_LOGICAL_FONT_SIZE = 8;
@@ -68,8 +73,6 @@ public class MyWebviewActivity extends Activity {
 
 	public class LbsWebViewClient extends WebViewClient {
 
-		private String closeWebViewUrl = "http://ios.mt.renren.com/place/nearby-new/nearby?";
-
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			initUrl = url;
@@ -102,8 +105,6 @@ public class MyWebviewActivity extends Activity {
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			super.onPageFinished(view, url);
-
-//            view.loadUrl("javascript:(function(){document.getElementById('promSub').onclick=function(){window.android.clickOnAndroid();return false;}})()");
 		}
 
 		/**
@@ -150,12 +151,12 @@ public class MyWebviewActivity extends Activity {
 		// or 'microphone' and the default value should be 'filesystem'.
 		String mediaSource = mediaSourceValueFileSystem;
 
-//        if (mUploadMessage != null) {
-//            // Already a file picker operation in progress.
-//            return;
-//        }
-//
-//        mUploadMessage = uploadMsg;
+        if (mUploadMessage != null) {
+            // Already a file picker operation in progress.
+            return;
+        }
+
+        mUploadMessage = uploadMsg;
 
 		// Parse the accept type.
 		String params[] = acceptType.split(";");
@@ -182,13 +183,13 @@ public class MyWebviewActivity extends Activity {
 		}
 
 		//Ensure it is not still set from a previous upload.
-//        mCameraFilePath = null;
+        mCameraFilePath = null;
 
 		if (mimeType.equals(imageMimeType)) {
 			if (mediaSource.equals(mediaSourceValueCamera)) {
 				// Specified 'image/*' and requested the camera, so go ahead and launch the
 				// camera directly.
-				startActivity(createCameraIntent());
+				startActivityForResult(createCameraIntent(), RESULT_LOAD_IMAGE);
 				return;
 			} else {
 				// Specified just 'image/*', capture=filesystem, or an invalid capture parameter.
@@ -196,14 +197,14 @@ public class MyWebviewActivity extends Activity {
 				// so launch an intent for both the Camera and image/* OPENABLE.
 				Intent chooser = createChooserIntent(createCameraIntent());
 				chooser.putExtra(Intent.EXTRA_INTENT, createOpenableIntent(imageMimeType));
-				startActivity(chooser);
+				startActivityForResult(chooser, RESULT_LOAD_IMAGE);
 				return;
 			}
 		} else if (mimeType.equals(videoMimeType)) {
 			if (mediaSource.equals(mediaSourceValueCamcorder)) {
 				// Specified 'video/*' and requested the camcorder, so go ahead and launch the
 				// camcorder directly.
-				startActivity(createCamcorderIntent());
+				startActivityForResult(createCamcorderIntent(), RESULT_LOAD_IMAGE);
 				return;
 			} else {
 				// Specified just 'video/*', capture=filesystem or an invalid capture parameter.
@@ -211,14 +212,14 @@ public class MyWebviewActivity extends Activity {
 				// on accept type so launch an intent for both camcorder and video/* OPENABLE.
 				Intent chooser = createChooserIntent(createCamcorderIntent());
 				chooser.putExtra(Intent.EXTRA_INTENT, createOpenableIntent(videoMimeType));
-				startActivity(chooser);
+				startActivityForResult(chooser, RESULT_LOAD_IMAGE);
 				return;
 			}
 		} else if (mimeType.equals(audioMimeType)) {
 			if (mediaSource.equals(mediaSourceValueMicrophone)) {
 				// Specified 'audio/*' and requested microphone, so go ahead and launch the sound
 				// recorder.
-				startActivity(createSoundRecorderIntent());
+				startActivityForResult(createSoundRecorderIntent(), RESULT_LOAD_IMAGE);
 				return;
 			} else {
 				// Specified just 'audio/*',  capture=filesystem of an invalid capture parameter.
@@ -226,14 +227,14 @@ public class MyWebviewActivity extends Activity {
 				// recorder and audio/* OPENABLE.
 				Intent chooser = createChooserIntent(createSoundRecorderIntent());
 				chooser.putExtra(Intent.EXTRA_INTENT, createOpenableIntent(audioMimeType));
-				startActivity(chooser);
+				startActivityForResult(chooser, RESULT_LOAD_IMAGE);
 				return;
 			}
 		}
 
 		// No special handling based on the accept type was necessary, so trigger the default
 		// file upload chooser.
-		startActivity(createDefaultOpenableIntent());
+		startActivityForResult(createDefaultOpenableIntent(), RESULT_LOAD_IMAGE);
 	}
 
 	private Intent createDefaultOpenableIntent() {
@@ -253,7 +254,7 @@ public class MyWebviewActivity extends Activity {
 	private Intent createChooserIntent(Intent... intents) {
 		Intent chooser = new Intent(Intent.ACTION_CHOOSER);
 		chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
-		chooser.putExtra(Intent.EXTRA_TITLE,"选择要上传的文件");
+		chooser.putExtra(Intent.EXTRA_TITLE,"选择应用");
 		return chooser;
 	}
 
@@ -265,15 +266,18 @@ public class MyWebviewActivity extends Activity {
 	}
 
 	private Intent createCameraIntent() {
-		String mCameraFilePath = "";
+		String datetime = "";
 		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		File externalDataDir = Environment.getExternalStoragePublicDirectory(
 				                                                                    Environment.DIRECTORY_DCIM);
 		File cameraDataDir = new File(externalDataDir.getAbsolutePath() +
-				                              File.separator + "browser-photos");
+				                              File.separator + "Camera");
 		cameraDataDir.mkdirs();
-		mCameraFilePath = cameraDataDir.getAbsolutePath() + File.separator +
-				                  System.currentTimeMillis() + ".jpg";
+		long dateTaken = System.currentTimeMillis();
+		if (dateTaken != 0) {
+			datetime = DateFormat.format("yyyyMMdd_kkmmss", dateTaken).toString();
+		}
+		mCameraFilePath = cameraDataDir.getAbsolutePath() + File.separator + "IMG_" + datetime + ".jpg";
 		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mCameraFilePath)));
 		return cameraIntent;
 	}
@@ -285,4 +289,32 @@ public class MyWebviewActivity extends Activity {
 	private Intent createSoundRecorderIntent() {
 		return new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK ) {
+			if(null != data) {
+				Uri selectedImage = data.getData();
+				String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+				Cursor cursor = getContentResolver().query(selectedImage,
+						                                          filePathColumn, null, null, null);
+				cursor.moveToFirst();
+
+				int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+				String picturePath = cursor.getString(columnIndex);
+				cursor.close();
+
+				// String picturePath contains the path of selected Image
+				mUploadMessage.onReceiveValue(Uri.fromFile(new File(picturePath)));
+			} else if (!mCameraFilePath.isEmpty()) {
+				mUploadMessage.onReceiveValue(Uri.fromFile(new File(mCameraFilePath)));
+				mCameraFilePath = "";
+			}
+			mUploadMessage = null;
+		}
+	}
+
 }
