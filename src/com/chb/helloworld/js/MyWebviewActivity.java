@@ -1,4 +1,4 @@
-package com.chb.addon.js;
+package com.chb.helloworld.js;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,11 +13,9 @@ import android.provider.MediaStore;
 import android.text.format.DateFormat;
 import android.view.KeyEvent;
 import android.webkit.*;
-import android.widget.TextView;
-import com.chb.addon.R;
+import com.chb.helloworld.R;
 
 import java.io.File;
-import java.util.Date;
 
 /**
  * Created by renen-inc_hempel on 14-5-4.

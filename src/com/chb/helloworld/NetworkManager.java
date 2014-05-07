@@ -1,4 +1,4 @@
-package com.chb.addon;
+package com.chb.helloworld;
 
 import android.content.Context;
 import android.content.Intent;

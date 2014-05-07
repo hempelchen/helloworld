@@ -1,4 +1,4 @@
-package com.chb.addon;
+package com.chb.helloworld;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 import java.lang.reflect.*;
 
-import com.chb.addon.js.MyWebviewActivity;
-import com.chb.addon.light.LightActivity;
+import com.chb.helloworld.js.MyWebviewActivity;
+import com.chb.helloworld.light.LightActivity;
 
 public class MainActivity extends Activity {
 
@@ -48,8 +48,8 @@ public class MainActivity extends Activity {
 		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-//				tx1.setText("启动中...");
-//				startOtherApp();
+				tx1.setText("启动中...");
+				startOtherApp();
 
 //				tx1.setText("定位中...");
 //				startLocate();
@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
 //				tx1.setText("打开手电筒");
 //				startLight();
 
-				tx1.setText("启动中Webview");
-				startMyWebview();
+//				tx1.setText("启动中Webview");
+//				startMyWebview();
 
 			}
 		});

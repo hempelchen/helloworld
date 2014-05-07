@@ -1,8 +1,8 @@
-package com.chb.addon.launchmode;
+package com.chb.helloworld.launchmode;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,12 +12,12 @@ import android.widget.TextView;
 /**
  * Created by renen-inc_hempel on 14-4-2.
  */
-public class ActD extends Activity {
+public class ActA extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setTitle("actD singleInstance");
+		this.setTitle("actA standard");
 		TextView textView = new TextView(this);
 		textView.setText(this + "");
 		TextView textView2 = new TextView(this);
@@ -28,7 +28,7 @@ public class ActD extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActD.this, ActA.class);
+				intent.setClass(ActA.this, ActA.class);
 				startActivity(intent);
 			}
 		});
@@ -39,7 +39,7 @@ public class ActD extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActD.this, ActB.class);
+				intent.setClass(ActA.this, ActB.class);
 				startActivity(intent);
 			}
 		});
@@ -50,7 +50,7 @@ public class ActD extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActD.this, ActC.class);
+				intent.setClass(ActA.this, ActC.class);
 				startActivity(intent);
 			}
 		});
@@ -61,7 +61,7 @@ public class ActD extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActD.this, ActD.class);
+				intent.setClass(ActA.this, ActD.class);
 				startActivity(intent);
 			}
 		});

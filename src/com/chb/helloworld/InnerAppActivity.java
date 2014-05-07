@@ -1,4 +1,4 @@
-package com.chb.addon;
+package com.chb.helloworld;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -10,10 +10,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import com.chb.addon.addonbase.AddonLoader;
+import com.chb.helloworld.addonbase.AddonLoader;
 
 public class InnerAppActivity extends FragmentActivity {
-	private String mAddonLunchFragment = "com.chb.addon.addonfragment.AddonFragment";
+	private String mAddonLunchFragment = "com.chb.helloworld.addonfragment.AddonFragment";
 	private String mAddonApkPath = "AddonFragment.apk";
 
 	private AssetManager asm;

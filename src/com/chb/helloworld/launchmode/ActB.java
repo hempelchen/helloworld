@@ -1,26 +1,22 @@
-package com.chb.addon.launchmode;
+package com.chb.helloworld.launchmode;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.*;
-import android.os.Process;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by renen-inc_hempel on 14-4-2.
  */
-public class ActA extends Activity {
-	/** Called when the activity is first created. */
+public class ActB extends Activity {
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setTitle("actA standard");
+		this.setTitle("actB singleTop");
 		TextView textView = new TextView(this);
 		textView.setText(this + "");
 		TextView textView2 = new TextView(this);
@@ -31,7 +27,7 @@ public class ActA extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActA.this, ActA.class);
+				intent.setClass(ActB.this, ActA.class);
 				startActivity(intent);
 			}
 		});
@@ -42,7 +38,7 @@ public class ActA extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActA.this, ActB.class);
+				intent.setClass(ActB.this, ActB.class);
 				startActivity(intent);
 			}
 		});
@@ -53,7 +49,7 @@ public class ActA extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActA.this, ActC.class);
+				intent.setClass(ActB.this, ActC.class);
 				startActivity(intent);
 			}
 		});
@@ -64,7 +60,7 @@ public class ActA extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ActA.this, ActD.class);
+				intent.setClass(ActB.this, ActD.class);
 				startActivity(intent);
 			}
 		});

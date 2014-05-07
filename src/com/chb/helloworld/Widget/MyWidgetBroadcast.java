@@ -1,4 +1,4 @@
-package com.chb.addon.widget;
+package com.chb.helloworld.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -9,7 +9,7 @@ import android.net.ConnectivityManager;
 import android.widget.Button;
 import android.widget.RemoteViews;
 import android.widget.TextView;
-import com.chb.addon.NetworkManager;
+import com.chb.helloworld.NetworkManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

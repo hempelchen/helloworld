@@ -1,4 +1,4 @@
-package com.chb.addon.light;
+package com.chb.helloworld.light;
 
 /**
  * Created by renen-inc_hempel on 14-3-19.

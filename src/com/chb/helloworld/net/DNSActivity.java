@@ -1,4 +1,4 @@
-package com.chb.addon.net;
+package com.chb.helloworld.net;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.chb.addon.R;
+import com.chb.helloworld.R;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

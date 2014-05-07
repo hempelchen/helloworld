@@ -1,4 +1,4 @@
-package com.chb.addon.widget;
+package com.chb.helloworld.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.TextView;
-import com.chb.addon.NetworkManager;
-import com.chb.addon.R;
+import com.chb.helloworld.NetworkManager;
+import com.chb.helloworld.R;
 
 public class MyWidgetProvider extends AppWidgetProvider{
 	private TextView tx1;

@@ -1,4 +1,4 @@
-package com.chb.addon.light;
+package com.chb.helloworld.light;
 
 /**
  * Created by renen-inc_hempel on 14-3-19.
@@ -8,7 +8,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import com.chb.addon.R;
+import com.chb.helloworld.R;
 
 public class LightActivity extends Activity {
 

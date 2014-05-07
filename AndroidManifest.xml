@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.chb.addon"
+          package="com.chb.helloworld"
           android:versionCode="1"
           android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="9"/>
@@ -20,14 +20,14 @@
 	<uses-feature android:name="android.hardware.camera.flash" />
 
 	<application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
-		<activity android:name="com.chb.addon.MainActivity"
+		<activity android:name="com.chb.helloworld.MainActivity"
 		          android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".InnerAppActivity"
+		<activity android:name="com.chb.helloworld.InnerAppActivity"
 		          android:label="我是一个子进程">
 
 		          <!-- 如果需要启动独立的子进程，可以打开下面的注视
@@ -35,7 +35,7 @@
 		          -->
 
 		</activity>
-		<activity android:name=".light.LightActivity">
+		<activity android:name="com.chb.helloworld.light.LightActivity">
 			<intent-filter>
 
 				<category android:name="android.intent.category.LAUNCHER"/>
@@ -49,7 +49,7 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name="com.chb.addon.launchmode.ActB"
+		<activity android:name="com.chb.helloworld.launchmode.ActB"
 		          android:launchMode="singleTop"
 		          android:label="ActB singleTop"
 				  >
@@ -83,9 +83,9 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity-->
-		<activity android:name=".js.MyWebviewActivity"/>
+		<activity android:name="com.chb.helloworld.js.MyWebviewActivity"/>
 
-		<receiver android:name=".widget.MyWidgetProvider">
+		<receiver android:name="com.chb.helloworld.widget.MyWidgetProvider">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
 			</intent-filter>
@@ -93,7 +93,7 @@
 			           android:resource="@xml/info" />
 		</receiver>
 
-		<receiver android:name=".widget.MyWidgetBroadcast">
+		<receiver android:name="com.chb.helloworld.widget.MyWidgetBroadcast">
 			<intent-filter>
 				<action android:name="CHANGE_MAIN_BUTTON_CONTENT_HW"/>
 			</intent-filter>

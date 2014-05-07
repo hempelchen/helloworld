@@ -1,4 +1,4 @@
-package com.chb.addon.addonfragment;
+package com.chb.helloworld.addonfragment;
 
 import android.graphics.Color;
 import android.os.*;
