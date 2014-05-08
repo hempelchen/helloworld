@@ -1,4 +1,4 @@
-package com.chb.helloworld.addonbase;
+package com.chb.helloworld.addon;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

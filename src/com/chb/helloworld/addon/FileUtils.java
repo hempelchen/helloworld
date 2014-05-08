@@ -1,4 +1,4 @@
-package com.chb.helloworld.addonbase;
+package com.chb.helloworld.addon;
 
 import java.io.File;
 import java.io.FileOutputStream;

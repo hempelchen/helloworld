@@ -1,4 +1,4 @@
-package com.chb.helloworld.widget;
+package com.chb.helloworld.mywidget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -61,7 +61,7 @@ public class MyWidgetBroadcast extends BroadcastReceiver{
 		}
 
 		AppWidgetManager manager=AppWidgetManager.getInstance(context);
-		RemoteViews remoteViews=MyWidgetProvider.getTimeView(context);
+		RemoteViews remoteViews= MyWidgetProvider.getTimeView(context);
 //		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.mobile_data);
 		int[] appids=manager.getAppWidgetIds(new ComponentName(context, MyWidgetProvider.class));
 		manager.updateAppWidget(appids, remoteViews);

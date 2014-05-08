@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import com.chb.helloworld.addonbase.AddonLoader;
+import com.chb.helloworld.addon.AddonLoader;
 
 public class InnerAppActivity extends FragmentActivity {
 	private String mAddonLunchFragment = "com.chb.helloworld.addonfragment.AddonFragment";

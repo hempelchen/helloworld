@@ -1,4 +1,4 @@
-package com.chb.helloworld.widget;
+package com.chb.helloworld.mywidget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;

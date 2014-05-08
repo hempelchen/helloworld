@@ -85,7 +85,7 @@
 		</activity-->
 		<activity android:name="com.chb.helloworld.js.MyWebviewActivity"/>
 
-		<receiver android:name="com.chb.helloworld.widget.MyWidgetProvider">
+		<receiver android:name="com.chb.helloworld.mywidget.MyWidgetProvider">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
 			</intent-filter>
@@ -93,7 +93,7 @@
 			           android:resource="@xml/info" />
 		</receiver>
 
-		<receiver android:name="com.chb.helloworld.widget.MyWidgetBroadcast">
+		<receiver android:name="com.chb.helloworld.mywidget.MyWidgetBroadcast">
 			<intent-filter>
 				<action android:name="CHANGE_MAIN_BUTTON_CONTENT_HW"/>
 			</intent-filter>
