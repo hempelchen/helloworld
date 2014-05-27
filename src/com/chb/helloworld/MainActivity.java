@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
-import com.chb.helloworld.memoryinfo.MemInfo;
+import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 //				tx1.setText("启动中Webview");
 //				startMyWebview();
 
-				tx1.setText(btnTitle);
+//				tx1.setText(btnTitle);
 				startMemInfo();
 			}
 		});
@@ -258,7 +258,7 @@ public class MainActivity extends Activity {
 
 	private void startMemInfo() {
 //		Context context = this.getApplicationContext();
-		Intent intent = new Intent(this, MemInfo.class);
+		Intent intent = new Intent(this, BrowseProcessInfoActivity.class);
 		startActivity(intent);
 	}
 

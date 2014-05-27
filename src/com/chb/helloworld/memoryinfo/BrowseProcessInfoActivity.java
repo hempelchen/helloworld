@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -34,32 +35,65 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 	private static final int SEARCH_RUNNING_APP = 2;
 
 	private ActivityManager mActivityManager = null;
+	private Activity mActivity = null;
 	// ProcessInfo Model类 用来保存所有进程信息
 	private List<ProcessInfo> processInfoList = null;
 
 	private ListView listviewProcess;
 	private TextView tvTotalProcessNo;
+	private TextView tvTotalAvailableMem;
+
+	private static String availMemStr = "";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.meminfo_process_list);
+		mActivity = this;
 
 		listviewProcess = (ListView) findViewById(R.id.listviewProcess);
 		listviewProcess.setOnItemClickListener(this);
 
 		tvTotalProcessNo = (TextView) findViewById(R.id.tvTotalProcessNo);
+		tvTotalProcessNo.setText("当前系统进程共有：");
+		tvTotalAvailableMem = (TextView) findViewById(R.id.tvTotalAvailableMem);
+		tvTotalAvailableMem.setText("当前系统可用内存共有：");
 
 		this.registerForContextMenu(listviewProcess);
-		// 获得ActivityManager服务的对象
-		mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		// 获得系统进程信息
-		getRunningAppProcessInfo();
-		// 为ListView构建适配器对象
-		BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(this, processInfoList);
-		listviewProcess.setAdapter(mprocessInfoAdapter);
 
-		tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+				//获得ActivityManager服务的对象
+				mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+				ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+				//获得系统可用内存，保存在MemoryInfo对象上
+				mActivityManager.getMemoryInfo(memoryInfo);
+				availMemStr = Formatter.formatFileSize(BrowseProcessInfoActivity.this, memoryInfo.availMem);
+
+
+						// 获得ActivityManager服务的对象
+				mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+				// 获得系统进程信息
+				getRunningAppProcessInfo();
+
+				mActivity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						// 为ListView构建适配器对象
+						BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(getApplicationContext(), processInfoList);
+						listviewProcess.setAdapter(mprocessInfoAdapter);
+
+						tvTotalAvailableMem.setText("当前系统可用内存共有：" + availMemStr);
+						tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
+					}
+				});
+
+			}
+		}).start();
+
+
 	}
 
 	//杀死该进程，并且刷新

@@ -11,6 +11,7 @@ public class ProcessInfo {
 	private String processName;
 	private String applicationName;
 	private boolean isSystemApp;
+	private boolean isDebugable;
 	private Drawable applicationIcon;
 
 	public ProcessInfo() {
@@ -62,6 +63,14 @@ public class ProcessInfo {
 
 	public void setIsSystemApp(boolean isSystemApp) {
 		this.isSystemApp = isSystemApp;
+	}
+
+	public boolean getIsDebugable() {
+		return isDebugable;
+	}
+
+	public void setIsDebugable(boolean isDebugable) {
+		this.isDebugable = isDebugable;
 	}
 
 	public Drawable getApplicationIcon() {

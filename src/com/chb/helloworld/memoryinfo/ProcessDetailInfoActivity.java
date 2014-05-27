@@ -29,6 +29,7 @@ public class ProcessDetailInfoActivity extends Activity {
 	TextView tvProcessName;
 	TextView tvApplicationName;
 	TextView tvIsSystemApp;
+	TextView tvIsDebugable;
 	ImageView ivApplicationIcon;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class ProcessDetailInfoActivity extends Activity {
 		tvProcessName = (TextView) findViewById(R.id.tvProcessName);
 		tvApplicationName = (TextView) findViewById(R.id.tvApplicationName);
 		tvIsSystemApp = (TextView) findViewById(R.id.tvIsSystemApp);
+		tvIsDebugable = (TextView) findViewById(R.id.tvIsDebugable);
 		ivApplicationIcon = (ImageView) findViewById(R.id.ivApplicationIcon);
 
 
@@ -74,6 +76,7 @@ public class ProcessDetailInfoActivity extends Activity {
 		tvProcessName.setText(processInfo.getProcessName());
 		tvApplicationName.setText(processInfo.getApplicationName());
 		tvIsSystemApp.setText((processInfo.getIsSystemApp()?"是":"否"));
+		tvIsDebugable.setText((processInfo.getIsDebugable()?"是":"否"));
 		ivApplicationIcon.setImageDrawable(processInfo.getApplicationIcon());
 
 	}
@@ -88,6 +91,7 @@ public class ProcessDetailInfoActivity extends Activity {
 			}
 			processInfo.setApplicationName(packageInfo.applicationInfo.loadLabel(pm).toString());
 			processInfo.setIsSystemApp(((packageInfo.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM) == 0 ? false:true));
+			processInfo.setIsDebugable(((packageInfo.applicationInfo.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0 ? false:true));
 			processInfo.setApplicationIcon( packageInfo.applicationInfo.loadIcon(pm));
 
 			Signature[] signs = packageInfo.signatures;
