@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.chb.helloworld.R;
 
@@ -55,6 +56,10 @@ public class BrowseProcessInfoAdapter extends BaseAdapter {
 		holder.tvUID.setText(processInfo.getUid() + "");
 		holder.tvProcessMemSize.setText(processInfo.getMemSize() + "KB");
 		holder.tvProcessName.setText(processInfo.getProcessName());
+		holder.tvApplicationName.setText(processInfo.getApplicationName());
+		holder.tvIsSystemApp.setText((processInfo.getIsSystemApp()?"是":"否"));
+		holder.tvIsDebugable.setText((processInfo.getIsDebugable()?"是":"否"));
+		holder.ivApplicationIcon.setImageDrawable(processInfo.getApplicationIcon());
 
 		return view;
 	}
@@ -64,12 +69,20 @@ public class BrowseProcessInfoAdapter extends BaseAdapter {
 		TextView tvUID;
 		TextView tvProcessMemSize;
 		TextView tvProcessName;
+		TextView tvApplicationName;
+		TextView tvIsSystemApp;
+		TextView tvIsDebugable;
+		ImageView ivApplicationIcon;
 
 		public ViewHolder(View view) {
 			this.tvPID = (TextView) view.findViewById(R.id.tvProcessPID);
 			this.tvUID = (TextView) view.findViewById(R.id.tvProcessUID);
 			this.tvProcessMemSize = (TextView) view.findViewById(R.id.tvProcessMemSize);
 			this.tvProcessName = (TextView) view.findViewById(R.id.tvProcessName);
+			this.tvApplicationName = (TextView) view.findViewById(R.id.tvApplicationName);
+			this.tvIsSystemApp = (TextView) view.findViewById(R.id.tvIsSystemApp);
+			this.tvIsDebugable = (TextView) view.findViewById(R.id.tvIsDebugable);
+			this.ivApplicationIcon = (ImageView) view.findViewById(R.id.ivApplicationIcon);
 		}
 	}
 

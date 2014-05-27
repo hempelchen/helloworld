@@ -1,81 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="80dip"
-	android:paddingTop="8dp"
-	android:paddingBottom="8dp"
-	android:orientation="vertical">
+              android:layout_width="fill_parent"
+              android:layout_height="200dp"
+              android:paddingTop="8dp"
+              android:paddingBottom="8dp"
+              android:orientation="vertical">
 
 	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="10dip"
-		android:orientation="horizontal">
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
 
 		<TextView
-			android:layout_width="100dip"
-			android:layout_height="wrap_content"
-			android:text="进程ID : "/>
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="应用图标:"/>
 
-		<TextView
-			android:id="@+id/tvProcessPID"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="3dip"
-			android:textColor="#FFD700"/>
+		<ImageView
+				android:id="@+id/ivApplicationIcon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:adjustViewBounds="true"
+				android:maxWidth="30dp"
+				android:scaleType="fitCenter"/>
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="10dip"
-		android:orientation="horizontal">
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
 
 		<TextView
-			android:layout_width="100dip"
-			android:layout_height="wrap_content"
-			android:text="进程所在UID:"/>
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="进程ID : "/>
 
 		<TextView
-			android:id="@+id/tvProcessUID"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#FFD700"/>
+				android:id="@+id/tvProcessPID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="3dp"
+				android:textColor="#FFD700"/>
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="10dip"
-		android:orientation="horizontal">
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
 
 		<TextView
-			android:layout_width="100dip"
-			android:layout_height="wrap_content"
-			android:text="进程占用内存:"/>
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="进程所在UID:"/>
 
 		<TextView
-			android:id="@+id/tvProcessMemSize"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#FFD700"/>
+				android:id="@+id/tvProcessUID"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#FFD700"/>
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="10dip"
-		android:orientation="horizontal">
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
 
 		<TextView
-			android:layout_width="100dip"
-			android:layout_height="wrap_content"
-			android:text="进程名:"/>
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="进程占用内存:"/>
 
 		<TextView
-			android:id="@+id/tvProcessName"
-			android:layout_width="wrap_content"
+				android:id="@+id/tvProcessMemSize"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#FFD700"/>
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:textColor="#FFD700"/>
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
+
+		<TextView
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="进程名:"/>
+
+		<TextView
+				android:id="@+id/tvProcessName"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#FFD700"/>
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
+
+		<TextView
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="应用名:"/>
+
+		<TextView
+				android:id="@+id/tvApplicationName"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#FFD700"/>
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
+
+		<TextView
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="是否系统应用:"/>
+
+		<TextView
+				android:id="@+id/tvIsSystemApp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#FFD700"/>
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:orientation="horizontal">
+
+		<TextView
+				android:layout_width="100dp"
+				android:layout_height="wrap_content"
+				android:text="是否可调式:"/>
+
+		<TextView
+				android:id="@+id/tvIsDebugable"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#FFD700"/>
 	</LinearLayout>
 </LinearLayout>

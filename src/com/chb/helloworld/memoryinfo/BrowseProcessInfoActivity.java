@@ -7,6 +7,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Debug;
 import android.text.format.Formatter;
@@ -158,12 +161,24 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 
 			Log.i(TAG, "processName: " + processName + "  pid: " + pid
 					           + " uid:" + uid + " memorySize is -->" + memSize + "kb");
+
 			// 构造一个ProcessInfo对象
 			ProcessInfo processInfo = new ProcessInfo();
 			processInfo.setPid(pid);
 			processInfo.setUid(uid);
 			processInfo.setMemSize(memSize);
 			processInfo.setPocessName(processName);
+
+			try {
+				PackageManager pm = getPackageManager();
+				PackageInfo packageInfo = pm.getPackageInfo(processName, PackageManager.GET_SIGNATURES);
+				processInfo.setApplicationName(packageInfo.applicationInfo.loadLabel(pm).toString());
+				processInfo.setIsSystemApp(((packageInfo.applicationInfo.flags& ApplicationInfo.FLAG_SYSTEM) == 0 ? false:true));
+				processInfo.setIsDebugable(((packageInfo.applicationInfo.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0 ? false:true));
+				processInfo.setApplicationIcon( packageInfo.applicationInfo.loadIcon(pm));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			processInfoList.add(processInfo);
 
 			// 获得每个进程里运行的应用程序(包),即每个应用程序的包名
