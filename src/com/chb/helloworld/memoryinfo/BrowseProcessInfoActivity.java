@@ -73,8 +73,7 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 						mActivityManager.killBackgroundProcesses(processInfoList.get(position).getProcessName());
 						//刷新界面
 						getRunningAppProcessInfo();
-						BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(
-								                                                                           BrowseProcessInfoActivity.this, processInfoList);
+						BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(BrowseProcessInfoActivity.this, processInfoList);
 						listviewProcess.setAdapter(mprocessInfoAdapter);
 						tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
 

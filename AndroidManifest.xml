@@ -11,6 +11,8 @@
 	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 
+	<!-- 内存，进程管理 -->
+	<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 	<!-- 摄像头、手电筒 -->
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
