@@ -16,11 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.lang.reflect.*;
-
 import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
+import com.chb.helloworld.memoryinfo.MemInfo;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MainActivity extends Activity {
 
@@ -44,12 +46,14 @@ public class MainActivity extends Activity {
 		tx1.setText("我是主进程\nPID = " + Process.myPid() + "\ntask id: " + this.getTaskId() );
 		tx1.setTextColor(Color.BLUE);
 
+		final String btnTitle = "内存测试";
 		btn1 = (Button) findViewById(R.id.btn1);
+		btn1.setText(btnTitle);
 		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				tx1.setText("启动中...");
-				startOtherApp();
+//				tx1.setText("启动中...");
+//				startOtherApp();
 
 //				tx1.setText("定位中...");
 //				startLocate();
@@ -60,6 +64,8 @@ public class MainActivity extends Activity {
 //				tx1.setText("启动中Webview");
 //				startMyWebview();
 
+				tx1.setText(btnTitle);
+				startMemInfo();
 			}
 		});
 	}
@@ -112,8 +118,8 @@ public class MainActivity extends Activity {
 				// log it when the location changes
 				if (location != null) {
 					Log.i("LBS", "Location changed : Lat: "
-							                  + location.getLatitude() + " Lon: "
-							                  + location.getLongitude());
+							             + location.getLatitude() + " Lon: "
+							             + location.getLongitude());
 					tx1.setText("定位中...\n经度： " + location.getLongitude() + "\n纬度： " + location.getLatitude());
 				}
 			}
@@ -248,6 +254,12 @@ public class MainActivity extends Activity {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void startMemInfo() {
+//		Context context = this.getApplicationContext();
+		Intent intent = new Intent(this, MemInfo.class);
+		startActivity(intent);
 	}
 
 
