@@ -43,7 +43,7 @@ public class BrowseProcessInfoAdapter extends BaseAdapter {
 		View view = null;
 		ViewHolder holder = null;
 		if (convertview == null || convertview.getTag() == null) {
-			view = infater.inflate(R.layout.browse_process_item, null);
+			view = infater.inflate(R.layout.meminfo_process_item, null);
 			holder = new ViewHolder(view);
 			view.setTag(holder);
 		} else {

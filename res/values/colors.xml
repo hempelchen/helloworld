@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- memory info 模块专用 -->
+	<color name="meminfo_process_list_divider">#838383</color>
+</resources>

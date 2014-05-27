@@ -88,6 +88,7 @@
 		<activity android:name="com.chb.helloworld.js.MyWebviewActivity"/>
 		<activity android:name=".memoryinfo.MemInfo"/>
 		<activity android:name=".memoryinfo.BrowseProcessInfoActivity"/>
+		<activity android:name=".memoryinfo.ProcessDetailInfoActivity"/>
 
 		<receiver android:name="com.chb.helloworld.mywidget.MyWidgetProvider">
 			<intent-filter>

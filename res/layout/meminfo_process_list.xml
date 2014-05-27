@@ -16,6 +16,8 @@
 		android:id="@+id/listviewProcess"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
+		android:dividerHeight="2dp"
+		android:divider="@color/meminfo_process_list_divider"
 		android:layout_marginTop="10dip" >
 	</ListView>
 </LinearLayout>

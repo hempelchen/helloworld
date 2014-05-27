@@ -42,7 +42,7 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.browse_process_list);
+		setContentView(R.layout.meminfo_process_list);
 
 		listviewProcess = (ListView) findViewById(R.id.listviewProcess);
 		listviewProcess.setOnItemClickListener(this);
