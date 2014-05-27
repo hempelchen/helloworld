@@ -64,13 +64,11 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 	//杀死该进程，并且刷新
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
-		// TODO Auto-generated method stub
 		new AlertDialog.Builder(this).setMessage("是否杀死该进程")
 				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
 						//杀死该进程，释放进程占用的空间
 						mActivityManager.killBackgroundProcesses(processInfoList.get(position).getProcessName());
 						//刷新界面
@@ -85,7 +83,6 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
 				dialog.cancel();
 			}
 		}).create().show();
@@ -150,14 +147,12 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								// TODO Auto-generated method stub
 
 							}
 						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
 						dialog.cancel();
 					}
 				}).create().show();

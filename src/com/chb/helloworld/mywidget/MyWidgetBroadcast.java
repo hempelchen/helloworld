@@ -25,7 +25,6 @@ public class MyWidgetBroadcast extends BroadcastReceiver{
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		// TODO Auto-generated method stub
 		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		networkManager = new NetworkManager(context);
 

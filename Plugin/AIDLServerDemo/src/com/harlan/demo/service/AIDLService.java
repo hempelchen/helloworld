@@ -22,7 +22,6 @@ public class AIDLService extends Service
     @Override
     public IBinder onBind(Intent intent)
     {
-        // TODO Auto-generated method stub
         return mBinder;
     }
     

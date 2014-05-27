@@ -39,7 +39,6 @@ public class MemInfo extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(MemInfo.this, BrowseProcessInfoActivity.class);
 				startActivity(intent);
 			}

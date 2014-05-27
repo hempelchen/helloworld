@@ -15,7 +15,6 @@ public class MyWidgetProvider extends AppWidgetProvider{
 
 	@Override
 	public void onDeleted(Context context, int[] appWidgetIds) {
-		// TODO Auto-generated method stub
 		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 
 		super.onDeleted(context, appWidgetIds);
@@ -23,21 +22,18 @@ public class MyWidgetProvider extends AppWidgetProvider{
 
 	@Override
 	public void onDisabled(Context context) {
-		// TODO Auto-generated method stub
 		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		super.onDisabled(context);
 	}
 
 	@Override
 	public void onEnabled(Context context) {
-		// TODO Auto-generated method stub
 		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		super.onEnabled(context);
 	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		// TODO Auto-generated method stub
 		RemoteViews views=new RemoteViews(context.getPackageName(), R.layout.mobile_data);
 		System.out.println(this.getClass().getSimpleName() + ":" + Thread.currentThread().getStackTrace()[2].getMethodName().toString());
 		System.out.println(intent.getAction());

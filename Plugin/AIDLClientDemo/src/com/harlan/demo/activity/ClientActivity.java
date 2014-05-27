@@ -134,7 +134,6 @@ public class ClientActivity extends Activity
         }
         catch (RemoteException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
