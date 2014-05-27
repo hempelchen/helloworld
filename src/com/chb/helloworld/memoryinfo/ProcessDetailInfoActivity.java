@@ -1,11 +1,14 @@
 package com.chb.helloworld.memoryinfo;
 
 import android.app.Activity;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.chb.helloworld.R;
 
@@ -24,6 +27,9 @@ public class ProcessDetailInfoActivity extends Activity {
 	TextView tvUID;
 	TextView tvProcessMemSize;
 	TextView tvProcessName;
+	TextView tvApplicationName;
+	TextView tvIsSystemApp;
+	ImageView ivApplicationIcon;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +51,10 @@ public class ProcessDetailInfoActivity extends Activity {
 			processInfo.setMemSize(args.getInt("memSize"));
 			processInfo.setPocessName(args.getString("processName"));
 
+			String processName = args.getString("processName");
+			if(!TextUtils.isEmpty(processName)) {
+				getProcessMoreInfo(processInfo.getProcessName());
+			}
 		}
 	}
 
@@ -53,18 +63,33 @@ public class ProcessDetailInfoActivity extends Activity {
 		tvUID = (TextView) findViewById(R.id.tvProcessUID);
 		tvProcessMemSize = (TextView) findViewById(R.id.tvProcessMemSize);
 		tvProcessName = (TextView) findViewById(R.id.tvProcessName);
+		tvApplicationName = (TextView) findViewById(R.id.tvApplicationName);
+		tvIsSystemApp = (TextView) findViewById(R.id.tvIsSystemApp);
+		ivApplicationIcon = (ImageView) findViewById(R.id.ivApplicationIcon);
+
 
 		tvPID.setText(processInfo.getPid() + "");
 		tvUID.setText(processInfo.getUid() + "");
 		tvProcessMemSize.setText(processInfo.getMemSize() + "KB");
 		tvProcessName.setText(processInfo.getProcessName());
+		tvApplicationName.setText(processInfo.getApplicationName());
+		tvIsSystemApp.setText((processInfo.getIsSystemApp()?"是":"否"));
+		ivApplicationIcon.setImageDrawable(processInfo.getApplicationIcon());
 
-		getSingInfo(processInfo.getProcessName());
 	}
 
-	public void getSingInfo(String packageName) {
+	public void getProcessMoreInfo(String packageName) {
 		try {
-			PackageInfo packageInfo = getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+			PackageManager pm = getPackageManager();
+			PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+
+			if(processInfo == null) {
+				processInfo = new ProcessInfo();
+			}
+			processInfo.setApplicationName(packageInfo.applicationInfo.loadLabel(pm).toString());
+			processInfo.setIsSystemApp(((packageInfo.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM) == 0 ? false:true));
+			processInfo.setApplicationIcon( packageInfo.applicationInfo.loadIcon(pm));
+
 			Signature[] signs = packageInfo.signatures;
 			Signature sign = signs[0];
 			parseSignature(sign.toByteArray());
