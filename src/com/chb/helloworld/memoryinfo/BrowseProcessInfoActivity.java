@@ -6,6 +6,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -64,27 +65,37 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 	//杀死该进程，并且刷新
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
-		new AlertDialog.Builder(this).setMessage("是否杀死该进程")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//		new AlertDialog.Builder(this).setMessage("是否杀死该进程")
+//				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						//杀死该进程，释放进程占用的空间
+//						mActivityManager.killBackgroundProcesses(processInfoList.get(position).getProcessName());
+//						//刷新界面
+//						getRunningAppProcessInfo();
+//						BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(BrowseProcessInfoActivity.this, processInfoList);
+//						listviewProcess.setAdapter(mprocessInfoAdapter);
+//						tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
+//
+//					}
+//				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				dialog.cancel();
+//			}
+//		}).create().show();
+		Bundle bundle = new Bundle();
+		bundle.putInt("pid", processInfoList.get(position).getPid());
+		bundle.putInt("uid", processInfoList.get(position).getUid());
+		bundle.putInt("memSize", processInfoList.get(position).getMemSize());
+		bundle.putString("processName", processInfoList.get(position).getProcessName());
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						//杀死该进程，释放进程占用的空间
-						mActivityManager.killBackgroundProcesses(processInfoList.get(position).getProcessName());
-						//刷新界面
-						getRunningAppProcessInfo();
-						BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(BrowseProcessInfoActivity.this, processInfoList);
-						listviewProcess.setAdapter(mprocessInfoAdapter);
-						tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
+		Intent intent = new Intent(this, ProcessDetailInfoActivity.class);
+		intent.putExtras(bundle);
+		startActivity(intent);
 
-					}
-				}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		}).create().show();
 	}
 
 	// 获得系统进程信息
