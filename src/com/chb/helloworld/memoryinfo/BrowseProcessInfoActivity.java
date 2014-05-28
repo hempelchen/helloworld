@@ -12,6 +12,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Debug;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -23,6 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.chb.helloworld.R;
+import com.chb.helloworld.utils.ViewServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.meminfo_process_list);
+		ViewServer.get(this).addWindow(this);
 		mActivity = this;
 
 		listviewProcess = (ListView) findViewById(R.id.listviewProcess);
@@ -63,40 +66,26 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 
 		this.registerForContextMenu(listviewProcess);
 
-
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-
-				//获得ActivityManager服务的对象
-				mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-				ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-				//获得系统可用内存，保存在MemoryInfo对象上
-				mActivityManager.getMemoryInfo(memoryInfo);
-				availMemStr = Formatter.formatFileSize(BrowseProcessInfoActivity.this, memoryInfo.availMem);
-
-
-						// 获得ActivityManager服务的对象
-				mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-				// 获得系统进程信息
-				getRunningAppProcessInfo();
-
-				mActivity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						// 为ListView构建适配器对象
-						BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(getApplicationContext(), processInfoList);
-						listviewProcess.setAdapter(mprocessInfoAdapter);
-
-						tvTotalAvailableMem.setText("当前系统可用内存共有：" + availMemStr);
-						tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
-					}
-				});
-
+				getSystemInfo();
 			}
 		}).start();
 
 
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ViewServer.get(this).removeWindow(this);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		ViewServer.get(this).setFocusedWindow(this);
 	}
 
 	//杀死该进程，并且刷新
@@ -136,6 +125,34 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 	}
 
 	// 获得系统进程信息
+	private void getSystemInfo() {
+		//获得ActivityManager服务的对象
+		mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+		//获得系统可用内存，保存在MemoryInfo对象上
+		mActivityManager.getMemoryInfo(memoryInfo);
+		availMemStr = Formatter.formatFileSize(BrowseProcessInfoActivity.this, memoryInfo.availMem);
+
+
+		// 获得ActivityManager服务的对象
+		mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		// 获得系统进程信息
+		getRunningAppProcessInfo();
+
+		mActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// 为ListView构建适配器对象
+				BrowseProcessInfoAdapter mprocessInfoAdapter = new BrowseProcessInfoAdapter(getApplicationContext(), processInfoList);
+				listviewProcess.setAdapter(mprocessInfoAdapter);
+
+				tvTotalAvailableMem.setText("当前系统可用内存共有：" + availMemStr);
+				tvTotalProcessNo.setText("当前系统进程共有：" + processInfoList.size());
+			}
+		});
+	}
+
+		// 获得系统进程信息
 	private void getRunningAppProcessInfo() {
 		// ProcessInfo Model类   用来保存所有进程信息
 		processInfoList = new ArrayList<ProcessInfo>();
@@ -171,11 +188,13 @@ public class BrowseProcessInfoActivity extends Activity implements OnItemClickLi
 
 			try {
 				PackageManager pm = getPackageManager();
-				PackageInfo packageInfo = pm.getPackageInfo(processName, PackageManager.GET_SIGNATURES);
-				processInfo.setApplicationName(packageInfo.applicationInfo.loadLabel(pm).toString());
-				processInfo.setIsSystemApp(((packageInfo.applicationInfo.flags& ApplicationInfo.FLAG_SYSTEM) == 0 ? false:true));
-				processInfo.setIsDebugable(((packageInfo.applicationInfo.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0 ? false:true));
-				processInfo.setApplicationIcon( packageInfo.applicationInfo.loadIcon(pm));
+				if(!TextUtils.isEmpty(processName)) {
+					PackageInfo packageInfo = pm.getPackageInfo(processName, PackageManager.GET_SIGNATURES);
+					processInfo.setApplicationName(packageInfo.applicationInfo.loadLabel(pm).toString());
+					processInfo.setIsSystemApp(((packageInfo.applicationInfo.flags& ApplicationInfo.FLAG_SYSTEM) == 0 ? false:true));
+					processInfo.setIsDebugable(((packageInfo.applicationInfo.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0 ? false:true));
+					processInfo.setApplicationIcon( packageInfo.applicationInfo.loadIcon(pm));
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

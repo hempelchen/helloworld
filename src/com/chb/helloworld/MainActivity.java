@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
 import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
+import com.chb.helloworld.utils.ViewServer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -40,6 +41,7 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		ViewServer.get(this).addWindow(this);
 
 		tx1 = (TextView) findViewById(R.id.tx1);
 		tx1.setTextSize(18);
@@ -68,6 +70,18 @@ public class MainActivity extends Activity {
 				startMemInfo();
 			}
 		});
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ViewServer.get(this).removeWindow(this);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		ViewServer.get(this).setFocusedWindow(this);
 	}
 
 	@Override
