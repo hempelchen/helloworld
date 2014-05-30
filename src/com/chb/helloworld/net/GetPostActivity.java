@@ -1,12 +1,14 @@
 package com.chb.helloworld.net;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.chb.helloworld.R;
+import com.chb.helloworld.js.MyWebviewActivity;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -90,7 +92,8 @@ public class GetPostActivity extends Activity {
 					}
 				} else if ( header[0].toString().contains("text/html")) {
 					Log.d("CHB", result);
-					Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+//					Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+					startLoadData(result);
 				}
 			}
 		} catch (Exception e) {
@@ -125,11 +128,23 @@ public class GetPostActivity extends Activity {
 					}
 				} else if ( header[0].toString().contains("text/html")) {
 					Log.d("CHB", result);
-					Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+//					Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+					startLoadData(result);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public void startLoadData( String webData) {
+		Bundle bundle = new Bundle();
+		bundle.putInt("loadType", 1);
+		bundle.putString("webData", webData);
+
+		Intent intent =  new Intent(this, MyWebviewActivity.class);
+		intent.putExtras(bundle);
+		this.startActivity(intent);
+	}
+
 }

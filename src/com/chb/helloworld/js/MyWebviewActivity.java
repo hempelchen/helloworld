@@ -34,15 +34,31 @@ public class MyWebviewActivity extends Activity {
 	protected String cacheUrl;
 	protected String initUrl;
 
+	// 0: default,loadUrl;  1:loadData
+	private static int loadType = 0;
+	private String webData = "";
+
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.js);
+		getExtras();
 		contentWebView = (WebView) findViewById(R.id.webview);
 		setWebViewProperty();
-		contentWebView.loadUrl("http://el-lady.com.cn/cw201402/mobile/camera.html");
+		if(loadType == 1) {
+			contentWebView.loadData(webData, "text/html", "utf-8");
+		} else {
+			contentWebView.loadUrl("http://el-lady.com.cn/cw201402/mobile/camera.html");
+		}
+	}
 
+	public void getExtras(){
+		Bundle args = this.getIntent().getExtras();
+		if( args != null) {
+			loadType = args.getInt("loadType", 0);
+			webData = args.getString("webData");
+		}
 	}
 
 	public void setWebViewProperty() {
@@ -127,6 +143,7 @@ public class MyWebviewActivity extends Activity {
 		@Override
 		public void onReceivedTitle(WebView view, String title) {
 			super.onReceivedTitle(view, title);
+			setTitle(title);
 		}
 
 		public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
