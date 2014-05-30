@@ -14,14 +14,21 @@
 			android:id="@+id/getpost_btn1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Get 测试"
+			android:text="Post 测试1"
 			android:layout_gravity="center_horizontal"/>
 
 	<Button
 			android:id="@+id/getpost_btn2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Post 测试"
+			android:text="Post 测试2"
+			android:layout_gravity="center_horizontal"/>
+
+	<Button
+			android:id="@+id/getpost_btn3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Get 测试"
 			android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 
