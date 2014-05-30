@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
 import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
+import com.chb.helloworld.net.GetPostActivity;
 import com.chb.helloworld.utils.ViewServer;
 
 import java.lang.reflect.Field;
@@ -48,26 +49,43 @@ public class MainActivity extends Activity {
 		tx1.setText("我是主进程\nPID = " + Process.myPid() + "\ntask id: " + this.getTaskId() );
 		tx1.setTextColor(Color.YELLOW);
 
-		final String btnTitle = "内存测试";
-		btn1 = (Button) findViewById(R.id.btn1);
-		btn1.setText(btnTitle);
-		btn1.setOnClickListener(new View.OnClickListener() {
+//		final String btnTitle = "Get/Post测试";
+//		btn1 = (Button) findViewById(R.id.main_btn1);
+//		btn1.setText(btnTitle);
+		((Button) findViewById(R.id.main_btn1)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-//				tx1.setText("启动中...");
-//				startOtherApp();
-
-//				tx1.setText("定位中...");
-//				startLocate();
-
-//				tx1.setText("打开手电筒");
-//				startLight();
-
-//				tx1.setText("启动中Webview");
-//				startMyWebview();
-
-//				tx1.setText(btnTitle);
+				startOtherApp();
+			}
+		});
+		((Button) findViewById(R.id.main_btn2)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startLbs();
+			}
+		});
+		((Button) findViewById(R.id.main_btn3)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startMyWebview();
+			}
+		});
+		((Button) findViewById(R.id.main_btn4)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startLight();
+			}
+		});
+		((Button) findViewById(R.id.main_btn5)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 				startMemInfo();
+			}
+		});
+		((Button) findViewById(R.id.main_btn6)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startGetPost();
 			}
 		});
 	}
@@ -110,19 +128,6 @@ public class MainActivity extends Activity {
 		context.startActivity(intent);
 	}
 
-	private void startMyWebview() {
-		Context context = this.getApplicationContext();
-		Intent intent = new Intent(context, MyWebviewActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(intent);
-	}
-
-	private void startLight() {
-//		Context context = this.getApplicationContext();
-		Intent intent = new Intent(this, LightActivity.class);
-//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(intent);
-	}
 
 	private void startLocate() {
 		Log.i("LBS", "startLocate");
@@ -220,6 +225,20 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	private void startMyWebview() {
+		Context context = this.getApplicationContext();
+		Intent intent = new Intent(context, MyWebviewActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(intent);
+	}
+
+	private void startLight() {
+//		Context context = this.getApplicationContext();
+		Intent intent = new Intent(this, LightActivity.class);
+//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+	}
+
 	public void setMobileDataStatus(Context context, boolean enabled)
 
 	{
@@ -276,5 +295,10 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+
+	private void startGetPost() {
+		Intent intent = new Intent(this, GetPostActivity.class);
+		startActivity(intent);
+	}
 
 }

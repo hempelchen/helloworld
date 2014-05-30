@@ -11,10 +11,40 @@
 			android:text="启动另一个应用"
 			/>
 	<Button
-			android:id="@+id/btn1"
+			android:id="@+id/main_btn1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="启动"
+			android:text="启动另一个应用"
+			android:layout_gravity="center_horizontal"/>
+	<Button
+			android:id="@+id/main_btn2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="定位测试"
+			android:layout_gravity="center_horizontal"/>
+	<Button
+			android:id="@+id/main_btn3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="内嵌浏览器"
+			android:layout_gravity="center_horizontal"/>
+	<Button
+			android:id="@+id/main_btn4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="手电筒"
+			android:layout_gravity="center_horizontal"/>
+	<Button
+			android:id="@+id/main_btn5"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="内存和应用列表"
+			android:layout_gravity="center_horizontal"/>
+	<Button
+			android:id="@+id/main_btn6"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Get/Post 测试"
 			android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 
