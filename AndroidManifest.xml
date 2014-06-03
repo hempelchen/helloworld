@@ -92,7 +92,8 @@
 				  android:screenOrientation="portrait"/>
 		<activity android:name=".memoryinfo.ProcessDetailInfoActivity"
 		          android:screenOrientation="portrait"/>
-		<activity android:name=".net.GetPostActivity"/>
+		<activity android:name=".net.GetPostActivity"
+		          android:screenOrientation="portrait"/>
 
 		<receiver android:name="com.chb.helloworld.mywidget.MyWidgetProvider">
 			<intent-filter>

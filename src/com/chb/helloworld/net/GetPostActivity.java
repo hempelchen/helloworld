@@ -34,9 +34,10 @@ import java.util.List;
 
 public class GetPostActivity extends Activity {
 	private static final String TAG = "CHB-GET/POST";
-	private Button btnTest1;
-	private Button btnTest2;
-
+	private static final String serverName = "http://10.2.44.171:8080";
+	private static final String rootName = "/apiroot"; //at Eclipse, it should be value of "Properties->Web Project Settings->Content root" at server project;
+	private static final String servletUrl = "/apiurl"; //at Eclipse, it should be value of <url-pattern> in "WebContent->WEB-INF->web.xml-><servlet-mapping>"
+	private static final String servletFullUrl = serverName + rootName + servletUrl;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,14 @@ public class GetPostActivity extends Activity {
 
 	private void postTest(String type){
 		try {
-			final String SERVER_URL = "http://10.2.44.171:8080/J2EEDemo2/Greeting2"; // 定义需要获取的内容来源地址
+			final String SERVER_URL = servletFullUrl; // 定义需要获取的内容来源地址
 			HttpPost request = new HttpPost(SERVER_URL); // 根据内容来源地址创建一个Http请求
 			List params = new ArrayList();
 			params.add(new BasicNameValuePair("type", type)); // 添加必须的参数
 			request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8)); // 设置参数的编码
 			HttpResponse httpResponse = new DefaultHttpClient().execute(request); // 发送请求并获取反馈
-// 解析返回的内容
+
+			// 解析返回的内容
 			if (httpResponse.getStatusLine().getStatusCode() != 404)
 			{
 				String result = EntityUtils.toString(httpResponse.getEntity());
@@ -103,11 +105,11 @@ public class GetPostActivity extends Activity {
 
 	private void getTest(String type){
 		try {
-			final String SERVER_URL = "http://10.2.44.171:8080/J2EEDemo2/Greeting2"; // 定义需要获取的内容来源地址
+			final String SERVER_URL = servletFullUrl; // 定义需要获取的内容来源地址
 			HttpGet request = new HttpGet(SERVER_URL); // 根据内容来源地址创建一个Http请求
-
 			HttpResponse httpResponse = new DefaultHttpClient().execute(request); // 发送请求并获取反馈
-// 解析返回的内容
+
+			// 解析返回的内容
 			if (httpResponse.getStatusLine().getStatusCode() != 404)
 			{
 				String result = EntityUtils.toString(httpResponse.getEntity());
