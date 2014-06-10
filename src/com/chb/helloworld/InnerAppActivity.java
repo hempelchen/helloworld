@@ -70,14 +70,14 @@ public class InnerAppActivity extends FragmentActivity {
 
 	@Override
 	public Resources getResources() {
-//		return res == null ? super.getResources() : res;
-		return super.getResources();
+		return res == null ? super.getResources() : res;
+//		return super.getResources();
 	}
 
 	@Override
 	public Resources.Theme getTheme() {
-//		return keepTheme || thm == null ? super.getTheme() : thm;
-		return super.getTheme();
+		return keepTheme || thm == null ? super.getTheme() : thm;
+//		return super.getTheme();
 	}
 
 	@Override
