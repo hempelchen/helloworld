@@ -31,13 +31,13 @@ public class InnerAppActivity extends FragmentActivity {
 				classLoader = loader.loadAssetAddon(mAddonApkPath, getClassLoader());
 			}
 
-			AssetManager am = AssetManager.class.newInstance();
-			am.getClass().getMethod("addAssetPath", String.class).invoke(am, loader.getApkLoader().getApkFilePath());
-			asm = am;
-			Resources superRes = super.getResources();
-			res = new Resources(am, superRes.getDisplayMetrics(), superRes.getConfiguration());
-			thm = res.newTheme();
-			thm.setTo(super.getTheme());
+//			AssetManager am = AssetManager.class.newInstance();
+//			am.getClass().getMethod("addAssetPath", String.class).invoke(am, loader.getApkLoader().getApkFilePath());
+//			asm = am;
+//			Resources superRes = super.getResources();
+//			res = new Resources(am, superRes.getDisplayMetrics(), superRes.getConfiguration());
+//			thm = res.newTheme();
+//			thm.setTo(super.getTheme());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,19 +65,20 @@ public class InnerAppActivity extends FragmentActivity {
 
 	@Override
 	public AssetManager getAssets() {
-		return asm == null ? super.getAssets() : asm;
+//		return asm == null ? super.getAssets() : asm;
+        return super.getAssets();
 	}
 
 	@Override
 	public Resources getResources() {
-		return res == null ? super.getResources() : res;
-//		return super.getResources();
+//		return res == null ? super.getResources() : res;
+		return super.getResources();
 	}
 
 	@Override
 	public Resources.Theme getTheme() {
-		return keepTheme || thm == null ? super.getTheme() : thm;
-//		return super.getTheme();
+//		return keepTheme || thm == null ? super.getTheme() : thm;
+		return super.getTheme();
 	}
 
 	@Override
