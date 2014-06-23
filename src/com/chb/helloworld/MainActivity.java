@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.chb.helloworld.baidumap.BaiduMapActivity;
 import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
 import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
@@ -86,6 +87,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				startGetPost();
+			}
+		});
+		((Button) findViewById(R.id.main_btn7)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startBaiduMap();
 			}
 		});
 	}
@@ -298,6 +305,11 @@ public class MainActivity extends Activity {
 
 	private void startGetPost() {
 		Intent intent = new Intent(this, GetPostActivity.class);
+		startActivity(intent);
+	}
+
+	private void startBaiduMap() {
+		Intent intent = new Intent(this, BaiduMapActivity.class);
 		startActivity(intent);
 	}
 

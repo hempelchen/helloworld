@@ -46,5 +46,11 @@
 			android:layout_height="wrap_content"
 			android:text="Get/Post 测试"
 			android:layout_gravity="center_horizontal"/>
+	<Button
+			android:id="@+id/main_btn7"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="百度地图"
+			android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 
