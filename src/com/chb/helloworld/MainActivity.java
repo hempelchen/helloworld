@@ -21,11 +21,14 @@ import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
 import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
 import com.chb.helloworld.net.GetPostActivity;
+import com.chb.helloworld.utils.CalendarUtil;
 import com.chb.helloworld.utils.ViewServer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -35,6 +38,7 @@ public class MainActivity extends Activity {
 	private double longitude = 0.0;
 	private TextView tx1;
 	private Button btn1;
+	private String dayofWeek[] = {"日", "一", "二", "三", "四", "五", "六"};
 
 	/**
 	 * Called when the activity is first created.
@@ -49,6 +53,7 @@ public class MainActivity extends Activity {
 		tx1.setTextSize(18);
 		tx1.setText("我是主进程\nPID = " + Process.myPid() + "\ntask id: " + this.getTaskId() );
 		tx1.setTextColor(Color.YELLOW);
+		setTime();
 
 //		final String btnTitle = "Get/Post测试";
 //		btn1 = (Button) findViewById(R.id.main_btn1);
@@ -126,6 +131,23 @@ public class MainActivity extends Activity {
 		Toast.makeText(this, "连续点击退出", Toast.LENGTH_SHORT).show();
 		mIsExit = true;
 
+	}
+
+	private void setTime(){
+		StringBuilder buf = new StringBuilder();
+		CalendarUtil cu = new CalendarUtil();
+		Calendar cal = Calendar.getInstance();
+		Date d = new Date();
+
+		String h=d.getHours()+":"+d.getMinutes();
+		String chineseMonth = cu.getChineseMonth(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+		String chineseDay = cu.getChineseDay(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+		buf.append("\n当前日期：").append(cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.DAY_OF_MONTH));
+		buf.append("  星期"+dayofWeek[d.getDay()]);
+		buf.append("\n当前时间：").append(h);
+		buf.append("\n农历：        ").append(chineseMonth).append(chineseDay);
+		System.out.println(chineseDay+"=============="+chineseMonth);
+		tx1.setText(tx1.getText() + "\n" + buf + "\n");
 	}
 
 	private void startOtherApp() {
