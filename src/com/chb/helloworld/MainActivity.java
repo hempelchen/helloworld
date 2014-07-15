@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.chb.helloworld.baidumap.BaiduMapActivity;
+import com.chb.helloworld.im.FormLogin;
 import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
 import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
@@ -100,6 +101,12 @@ public class MainActivity extends Activity {
 				startBaiduMap();
 			}
 		});
+		((Button) findViewById(R.id.main_btn8)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startIm();
+			}
+		});
 	}
 
 	@Override
@@ -143,10 +150,10 @@ public class MainActivity extends Activity {
 		String chineseMonth = cu.getChineseMonth(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
 		String chineseDay = cu.getChineseDay(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
 		buf.append("\n当前日期：").append(cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.DAY_OF_MONTH));
-		buf.append("  星期"+dayofWeek[d.getDay()]);
+		buf.append("  星期" + dayofWeek[d.getDay()]);
 		buf.append("\n当前时间：").append(h);
 		buf.append("\n农历：        ").append(chineseMonth).append(chineseDay);
-		System.out.println(chineseDay+"=============="+chineseMonth);
+		System.out.println(chineseDay + "==============" + chineseMonth);
 		tx1.setText(tx1.getText() + "\n" + buf + "\n");
 	}
 
@@ -332,6 +339,11 @@ public class MainActivity extends Activity {
 
 	private void startBaiduMap() {
 		Intent intent = new Intent(this, BaiduMapActivity.class);
+		startActivity(intent);
+	}
+
+	private void startIm() {
+		Intent intent = new Intent(this, FormLogin.class);
 		startActivity(intent);
 	}
 
