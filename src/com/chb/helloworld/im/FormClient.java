@@ -63,7 +63,7 @@ public class FormClient extends Activity {
 
 		//message listener
 		ChatManager cm = XmppTool.getConnection().getChatManager();
-		final Chat newchat = cm.createChat("chb2@"+ ImConst.ImSever, null);
+		final Chat newchat = cm.createChat("chb2@"+ ImConst.ImSever, null); //创建监听对象，一般监听一个好友账号.
 		cm.addChatListener(new ChatManagerListener() {
 			@Override
 			public void chatCreated(Chat chat, boolean able) {
