@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.chb.helloworld.R;
+import com.chb.helloworld.im.util.ImConst;
 import com.chb.helloworld.im.util.TimeRender;
 import com.chb.helloworld.im.util.XmppTool;
 import org.jivesoftware.smack.*;
@@ -62,7 +63,7 @@ public class FormClient extends Activity {
 
 		//message listener
 		ChatManager cm = XmppTool.getConnection().getChatManager();
-		final Chat newchat = cm.createChat("chb2", null);
+		final Chat newchat = cm.createChat("chb2@"+ ImConst.ImSever, null);
 		cm.addChatListener(new ChatManagerListener() {
 			@Override
 			public void chatCreated(Chat chat, boolean able) {

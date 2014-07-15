@@ -15,7 +15,7 @@ public class XmppTool {
 	
 	private static void openConnection() {
 		try {
-			ConnectionConfiguration connConfig = new ConnectionConfiguration("10.2.44.171", 5222);
+			ConnectionConfiguration connConfig = new ConnectionConfiguration(ImConst.ImSever, 5222);
 			con = new XMPPConnection(connConfig);
 			con.connect();
 		} catch (XMPPException xe) {
