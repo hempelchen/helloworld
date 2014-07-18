@@ -16,6 +16,12 @@ public class XmppTool {
 	private static void openConnection() {
 		try {
 			ConnectionConfiguration connConfig = new ConnectionConfiguration(ImConst.ImSever, 5222);
+//			connConfig.setReconnectionAllowed(true);
+//			connConfig.setSecurityMode(ConnectionConfiguration.SecurityMode.enabled);
+//			connConfig.setSASLAuthenticationEnabled(true);
+//			connConfig.setTruststorePath("/sdcard/Hempel/cacerts.bks");
+//			connConfig.setTruststorePassword("chb123");
+//			connConfig.setTruststoreType("bks");
 			con = new XMPPConnection(connConfig);
 			con.connect();
 		} catch (XMPPException xe) {
@@ -31,7 +37,9 @@ public class XmppTool {
 	}
 
 	public static void closeConnection() {
-		con.disconnect();
-		con = null;
+		if(con != null) {
+			con.disconnect();
+			con = null;
+		}
 	}
 }

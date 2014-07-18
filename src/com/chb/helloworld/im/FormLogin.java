@@ -49,12 +49,15 @@ public class FormLogin extends Activity implements OnClickListener {
 				public void run() {
 					handler.sendEmptyMessage(1);
 					try {
-						XmppTool.getConnection().login(USERID, PWD);
+//						XmppTool.getConnection().login(USERID, PWD);
+//						XmppTool.getConnection().login("admin", "chb123");
+						XmppTool.getConnection().login("chb1", "chb123");
 						Log.i("XMPPClient", "Logged in as " + XmppTool.getConnection().getUser());
 						// status
 						Presence presence = new Presence(Presence.Type.available);
 						XmppTool.getConnection().sendPacket(presence);
-						Intent intent = new Intent(FormLogin.this, FormClient.class);
+//						Intent intent = new Intent(FormLogin.this, FormClient.class);
+						Intent intent = new Intent(FormLogin.this, FormFriendsList.class);
 						intent.putExtra("USERID", USERID);
 						startActivity(intent);
 						FormLogin.this.finish();
