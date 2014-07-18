@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    tools:context=".ClientActivity" >
+
+    <TextView
+        android:id="@+id/text_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/app_descri" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_des"
+        android:layout_marginTop="68dp"
+        android:text="@string/input_name" />
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_name"
+        android:layout_alignBottom="@+id/text_name"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:hint="@string/input_name"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/text_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editText_name"
+        android:layout_marginTop="70dp"
+        android:text="@string/input_age" />
+
+    <TextView
+        android:id="@+id/text_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_age"
+        android:layout_marginTop="79dp"
+        android:text="@string/input_place" />
+
+    <EditText
+        android:id="@+id/editText_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_age"
+        android:layout_alignBottom="@+id/text_age"
+        android:layout_alignLeft="@+id/editText_name"
+        android:inputType="number"
+        android:hint="@string/input_age"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_place"
+        android:layout_alignBottom="@+id/text_place"
+        android:layout_alignLeft="@+id/editText_age"
+        android:hint="@string/input_place"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/button_commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/text_des"
+        android:layout_marginBottom="35dp"
+        android:enabled="true"
+        android:text="@string/commit" />
+
+</RelativeLayout>
