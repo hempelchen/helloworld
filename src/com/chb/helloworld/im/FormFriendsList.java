@@ -123,10 +123,10 @@ public class FormFriendsList extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent){
-			System.out.println("getView position=" + position + ", view="+convertView);
 
-			ViewHolder holder = new ViewHolder();
+			ViewHolder holder;
 			if(convertView == null){
+				holder = new ViewHolder();
 				convertView = (View) mInflater.inflate(R.layout.im_friendslist_item, null);
 
 				holder.header = (ImageView)convertView.findViewById(R.id.friendslist_header);
@@ -141,6 +141,8 @@ public class FormFriendsList extends Activity {
 			holder.header.setImageDrawable(getResources().getDrawable(R.drawable.default_header));
 			holder.jid.setText(rosterList.get(position).getUser());
 			holder.nickName.setText(rosterList.get(position).getName());
+			System.out.println("getView position=" + position + ", view="+convertView);
+
 			return convertView;
 		}
 
