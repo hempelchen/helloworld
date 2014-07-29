@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.Process;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.chb.helloworld.js.MyWebviewActivity;
 import com.chb.helloworld.light.LightActivity;
 import com.chb.helloworld.memoryinfo.BrowseProcessInfoActivity;
 import com.chb.helloworld.net.GetPostActivity;
+import com.chb.helloworld.player.MediaPlayerActivity;
 import com.chb.helloworld.utils.CalendarUtil;
 import com.chb.helloworld.utils.ViewServer;
 
@@ -40,6 +42,26 @@ public class MainActivity extends Activity {
 	private TextView tx1;
 	private Button btn1;
 	private String dayofWeek[] = {"日", "一", "二", "三", "四", "五", "六"};
+
+
+	public Handler handler = new Handler(){
+		public void handleMessage(Message msg){
+			switch (msg.what) {
+				case 1:
+					Log.d("CHB", "handler msg what =1");
+					break;
+
+				case 2:
+					Log.d("CHB", "handler msg what =2");
+					break;
+
+				case 3:
+					Log.d("CHB", "handler msg what =3");
+					break;
+			}
+		}
+	};
+
 
 	/**
 	 * Called when the activity is first created.
@@ -105,6 +127,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				startIm();
+			}
+		});
+		((Button) findViewById(R.id.main_btn9)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startPlayer();
 			}
 		});
 	}
@@ -344,6 +372,11 @@ public class MainActivity extends Activity {
 
 	private void startIm() {
 		Intent intent = new Intent(this, FormLogin.class);
+		startActivity(intent);
+	}
+
+	private void startPlayer() {
+		Intent intent = new Intent(this, MediaPlayerActivity.class);
 		startActivity(intent);
 	}
 

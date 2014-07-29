@@ -30,6 +30,11 @@
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
 
+	<!-- 监听电话呼出 -->
+	<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+	<!-- 监听电话状态改变 -->
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 	<uses-feature android:name="android.hardware.camera" />
 	<uses-feature android:name="android.hardware.camera.autofocus" />
 	<uses-feature android:name="android.hardware.camera.flash" />
@@ -125,6 +130,8 @@
 		<activity android:name=".im.FormFiles"
 				  android:screenOrientation="portrait" />
 		<activity android:name=".im.FormFriendsList"
+		          android:screenOrientation="portrait"/>
+		<activity android:name=".player.MediaPlayerActivity"
 		          android:screenOrientation="portrait"/>
 
 		<receiver android:name="com.chb.helloworld.mywidget.MyWidgetProvider">

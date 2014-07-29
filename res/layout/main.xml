@@ -64,5 +64,12 @@
 				android:layout_height="wrap_content"
 				android:text="IM"
 				android:layout_gravity="center_horizontal"/>
+		<Button
+				android:id="@+id/main_btn9"
+				android:minWidth="60dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="播放器"
+				android:layout_gravity="center_horizontal"/>
 	</LinearLayout>
 </ScrollView>
