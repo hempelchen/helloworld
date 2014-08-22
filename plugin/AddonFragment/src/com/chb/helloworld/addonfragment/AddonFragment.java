@@ -17,7 +17,7 @@ public class AddonFragment extends Fragment {
 	public View onCreateView(LayoutInflater layoutinflater, ViewGroup viewgroup, Bundle bundle) {
 		View view = layoutinflater.inflate(R.layout.test, null);
 		TextView textview = (TextView)view.findViewById(R.id.addonfragment_tx1);
-        String txt = getResources().getString(R.string.app_name1);
+        String txt = getResources().getString(R.string.app_name);
 		textview.setText(strDes + Process.myPid() + "\ntask id: " + this.getActivity().getTaskId() + " \n" + txt );
 		textview.setTextColor(Color.RED);
 		view.setBackgroundColor(Color.GRAY);

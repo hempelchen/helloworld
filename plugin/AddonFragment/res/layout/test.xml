@@ -10,11 +10,5 @@
 			android:layout_height="wrap_content"
 			android:text=""
 			/>
-	<TextView
-			android:id="@+id/addonfragment_tx2"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="我是主工程的资源"
-			/>
 </LinearLayout>
 
