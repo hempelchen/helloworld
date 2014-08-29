@@ -32,16 +32,21 @@ public class InnerAppActivity extends FragmentActivity {
 			}
 
 			AssetManager am = AssetManager.class.newInstance();
+            System.out.println("CHB1");
 			am.getClass().getMethod("addAssetPath", String.class).invoke(am, loader.getApkLoader().getApkFilePath());
+            System.out.println("CHB2");
 			asm = am;
 			Resources superRes = super.getResources();
+            System.out.println("CHB3");
 			res = new Resources(am, superRes.getDisplayMetrics(), superRes.getConfiguration());
 			thm = res.newTheme();
 			thm.setTo(super.getTheme());
+            System.out.println("CHB4");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+        System.out.println("CHB5");
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		FrameLayout rootView = new FrameLayout(this);
@@ -49,15 +54,18 @@ public class InnerAppActivity extends FragmentActivity {
 		rootView.setId(android.R.id.primary);
 		setContentView(rootView);
 		keepTheme = false;
+        System.out.println("CHB6");
 
 		try {
 			String fragmentClass = mAddonLunchFragment;
 			Fragment f = (Fragment) classLoader.loadClass(fragmentClass).newInstance();
+            System.out.println("CHB7");
 
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
 			ft.add(android.R.id.primary, f);
 			ft.commit();
+            System.out.println("CHB8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -54,11 +54,11 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="com.chb.helloworld.InnerAppActivity"
-		          android:label="我是一个子进程">
+                  android:label="我是一个子进程">
 
-		          <!-- 如果需要启动独立的子进程，可以打开下面的注视
-		          android:process=":child_process_any_name_is_ok"
-		          -->
+            <!-- 如果需要启动独立的子进程，可以打开下面的注视
+            android:process=":child_process_any_name_is_ok"
+            -->
 
 		</activity>
 		<activity android:name="com.chb.helloworld.light.LightActivity">
